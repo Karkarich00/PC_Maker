@@ -60,6 +60,12 @@ public class ScreenSSD implements Screen {
             touch.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(touch);
             if(btnBACK.hit(touch.x, touch.y)){
+                lastcomp.remove(lastcomp.size()-1);
+                for(int i = 0; i < ssd.size(); i++){
+                    if(ssd.get(i).light == 1){
+                        ssd.get(i).light = 0;
+                    }
+                }
                 main.setScreen(main.screenRAM);
             }
             if(btnNEXT.hit(touch.x, touch.y)){

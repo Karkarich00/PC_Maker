@@ -70,6 +70,12 @@ public class ScreenRAM implements Screen {
             touch.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(touch);
             if(btnBACK.hit(touch.x, touch.y)){
+                lastcomp.remove(lastcomp.size()-1);
+                for(int i = 0; i < ram.size(); i++){
+                    if(ram.get(i).light == 1){
+                        ram.get(i).light = 0;
+                    }
+                }
                 main.setScreen(main.screenCPU);
             }
             if(btnNEXT.hit(touch.x, touch.y)){

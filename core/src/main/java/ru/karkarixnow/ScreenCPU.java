@@ -71,6 +71,12 @@ public class ScreenCPU implements Screen {
             touch.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(touch);
             if(btnBACK.hit(touch.x, touch.y)){
+                lastcomp.remove(lastcomp.size()-1);
+                for(int i = 0; i < cpu.size(); i++){
+                    if(cpu.get(i).light == 1){
+                        cpu.get(i).light = 0;
+                    }
+                }
                 main.setScreen(main.screenMotherboard);
             }
             if(btnNEXT.hit(touch.x, touch.y)){
