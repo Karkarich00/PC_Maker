@@ -10,26 +10,23 @@ import java.util.List;
 public class Comp {
     int price;
     String name;
-    int proizv;
+    double proizv;
     int type;
     List<String> sovmest = new ArrayList<>();
-    boolean selected;
     float x = 0;
     float y = 0;
     float width, height;
-    BitmapFont font1;
-    BitmapFont font2;
+    BitmapFont font;
     int light;
 
-    public Comp(String name, int price, int proizv, int type){
+    public Comp(String name, int price, double proizv, int type, BitmapFont font){
         this.name = name;
         this.price = price;
         this.proizv = proizv;
         this.type = type;
         this.light = 0;
-        this.font1 = new BitmapFont(Gdx.files.internal("red2.fnt"));
-        this.font2 = new BitmapFont(Gdx.files.internal("green2.fnt"));
-        GlyphLayout glyphLayout = new GlyphLayout(font1, name);
+        this.font = font;
+        GlyphLayout glyphLayout = new GlyphLayout(font, name);
         width = glyphLayout.width;
         height = glyphLayout.height;
     }

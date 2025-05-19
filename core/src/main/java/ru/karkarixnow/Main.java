@@ -1,12 +1,13 @@
 package ru.karkarixnow;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
+
+import java.util.ArrayList;
 
 public class Main extends Game {
     public static final float SCR_WIDTH = 900;
@@ -22,12 +23,19 @@ public class Main extends Game {
     public OrthographicCamera camera;
     public Vector3 touch;
     public BitmapFont font;
+    public BitmapFont font1;
+    public BitmapFont font2;
     ScreenMenu screenMenu;
     ScreenGame screenGame;
     ScreenSettings screenSettings;
     ScreenLeaderBoard screenLeaderBoard;
     ScreenAbout screenAbout;
+    ScreenMotherboard screenMotherboard;
     ScreenCPU screenCPU;
+    ScreenRAM screenRAM;
+    ScreenSSD screenSSD;
+    ScreenPSU screenPSU;
+    public static ArrayList<Comp> lastcomp = new ArrayList<>();
     @Override
     public void create() {
         batch = new SpriteBatch();
@@ -35,13 +43,19 @@ public class Main extends Game {
         camera.setToOrtho(false, SCR_WIDTH, SCR_HEIGHT);
         touch = new Vector3();
         font = new BitmapFont(Gdx.files.internal("last.fnt"));
+        font1 = new BitmapFont(Gdx.files.internal("red2.fnt"));
+        font2 = new BitmapFont(Gdx.files.internal("green2.fnt"));
 
         screenMenu = new ScreenMenu(this);
         screenGame = new ScreenGame(this);
         screenAbout = new ScreenAbout(this);
         screenLeaderBoard = new ScreenLeaderBoard(this);
         screenSettings = new ScreenSettings(this);
+        screenMotherboard = new ScreenMotherboard(this);
         screenCPU = new ScreenCPU(this);
+        screenRAM = new ScreenRAM(this);
+        screenSSD = new ScreenSSD(this);
+        screenPSU = new ScreenPSU(this);
         setScreen(screenMenu);
     }
 
