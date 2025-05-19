@@ -38,15 +38,18 @@ public class ScreenGame implements Screen {
         font = main.font;
         font1 = main.font1;
         font2 = main.font2;
-        BG = new Texture("background2.png");
+        BG = new Texture("Game.png");
         btnNEXT = new Button(font, "NEXT", 700, 100);
-        btnBACK = new Button(font, "BACK", 100, 100);
+        btnBACK = new Button(font, "BACK", 50, 100);
         comps.add(new Comp("NVIDIA RTX 4090", 239000, 5,GPU, font1));
-        comps.add(new Comp("RTX 4070 SUPER", 62000, 5,GPU, font1));
-        comps.add(new Comp("AMD RX 7800 XT ", 56000, 4, GPU, font1));
-        comps.add(new Comp("AMD RX 7700 XT", 44000, 3, GPU, font1));
-        comps.add(new Comp("AMD RX 7600", 27000, 3, GPU, font1));
-
+        comps.add(new Comp("RTX 4070 SUPER", 62000, 4,GPU, font1));
+        comps.add(new Comp("AMD RX 7800 XT", 56000, 4, GPU, font1));
+        comps.add(new Comp("AMD RX 7700 XT", 44000, 3.5, GPU, font1));
+        comps.add(new Comp("AMD RX 7600", 27000, 2.5, GPU, font1));
+        comps.add(new Comp("RTX 3060 Ti", 30500, 3, GPU, font1));
+        comps.add(new Comp("RTX 4080", 120000, 4.5, GPU, font1));
+        comps.add(new Comp("RX 6700 XT", 64000, 3, GPU, font1));
+        comps.add(new Comp("RTX 4060 CORE", 32000, 3.5, GPU, font1));
     }
     @Override
     public void show() {
@@ -89,9 +92,9 @@ public class ScreenGame implements Screen {
         batch.begin();
         batch.draw(BG, 0, 0, SCR_WIDTH, SCR_HEIGHT);
         for(int i = 0; i< comps.size(); i++){
-            font.draw(batch, i+1+" ", 140, 1500-i*300);
-            comps.get(i).x = 200;
-            comps.get(i).y = 1500-i*300;
+            font.draw(batch, i+1+" ", 10, 1500-i*150);
+            comps.get(i).x = 60;
+            comps.get(i).y = 1500-i*150;
             if(comps.get(i).light == 0){
                 font1.draw(batch, comps.get(i).name, comps.get(i).x, comps.get(i).y );
             }

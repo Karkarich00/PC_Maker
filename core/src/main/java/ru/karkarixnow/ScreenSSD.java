@@ -35,9 +35,9 @@ public class ScreenSSD implements Screen {
         font = main.font;
         font1 = main.font1;
         font2 = main.font2;
-        BG = new Texture("background2.png");
+        BG = new Texture("SSD.png");
         btnNEXT = new Button(font, "NEXT", 700, 100);
-        btnBACK = new Button(font, "BACK", 100, 100);
+        btnBACK = new Button(font, "BACK", 50, 100);
         ssd.add(new Comp("ADATA LEGEND 960 MAX", 9200, 3.5, SSD, font1));
         ssd.add(new Comp("Samsung 990 PRO", 11500, 5, SSD, font1));
         ssd.add(new Comp("WD Black SN850X", 10000, 4.5, SSD, font1));
@@ -92,8 +92,8 @@ public class ScreenSSD implements Screen {
         batch.begin();
         batch.draw(BG, 0, 0, SCR_WIDTH, SCR_HEIGHT);
         for(int i = 0; i< ssd.size(); i++){
-            font.draw(batch, i+1+" ", 140, 1500-i*150);
-            ssd.get(i).x = 200;
+            font.draw(batch, i+1+" ", 10, 1500-i*150);
+            ssd.get(i).x = 60;
             ssd.get(i).y = 1500-i*150;
             if(ssd.get(i).light == 0){
                 font1.draw(batch, ssd.get(i).name, ssd.get(i).x, ssd.get(i).y );

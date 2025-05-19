@@ -37,9 +37,9 @@ public class ScreenMotherboard implements Screen {
         font = main.font;
         font1 = main.font1;
         font2 = main.font2;
-        BG = new Texture("background2.png");
+        BG = new Texture("Motherboard.png");
         btnNEXT = new Button(font, "NEXT", 700, 100);
-        btnBACK = new Button(font, "BACK", 100, 100);
+        btnBACK = new Button(font, "BACK", 50, 100);
         motherboard.add(new Comp("ASUS ROG Strix B650-A Gaming WiFi", 25000, 0, MOTHERBOARD, font1));
         motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("AMD7", "DDR5-6000"));
         motherboard.add(new Comp("MSI MAG B650 Tomahawk WiFi", 21000, 0, MOTHERBOARD, font1));
@@ -105,8 +105,8 @@ public class ScreenMotherboard implements Screen {
         batch.begin();
         batch.draw(BG, 0, 0, SCR_WIDTH, SCR_HEIGHT);
         for(int i = 0; i< motherboard.size(); i++){
-            font.draw(batch, i+1+" ", 50, 1500-i*150);
-            motherboard.get(i).x = 100;
+            font.draw(batch, i+1+" ", 10, 1500-i*150);
+            motherboard.get(i).x = 60;
             motherboard.get(i).y = 1500-i*150;
             if(motherboard.get(i).light == 0){
                 font1.draw(batch, motherboard.get(i).name, motherboard.get(i).x, motherboard.get(i).y );

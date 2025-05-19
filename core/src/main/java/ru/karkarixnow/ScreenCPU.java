@@ -36,9 +36,9 @@ public class ScreenCPU implements Screen {
         font = main.font;
         font1 = main.font1;
         font2 = main.font2;
-        BG = new Texture("background2.png");
+        BG = new Texture("CPU.png");
         btnNEXT = new Button(font, "NEXT", 700, 100);
-        btnBACK = new Button(font, "BACK", 100, 100);
+        btnBACK = new Button(font, "BACK", 50, 100);
         cpu.add(new Comp("AMD Ryzen 5 7600X", 19000, 3.5, CPU , font1));
         cpu.get(cpu.size()-1).sovmest.addAll(Arrays.asList("AMD7"));
         cpu.add(new Comp("AMD Ryzen 7 7800X3D", 40500, 5, CPU , font1));
@@ -103,8 +103,8 @@ public class ScreenCPU implements Screen {
         batch.begin();
         batch.draw(BG, 0, 0, SCR_WIDTH, SCR_HEIGHT);
         for(int i = 0; i< cpu.size(); i++){
-            font.draw(batch, i+1+" ", 50, 1500-i*150);
-            cpu.get(i).x = 100;
+            font.draw(batch, i+1+" ", 10, 1500-i*150);
+            cpu.get(i).x = 60;
             cpu.get(i).y = 1500-i*150;
             if(cpu.get(i).light == 0){
                 font1.draw(batch, cpu.get(i).name, cpu.get(i).x, cpu.get(i).y );

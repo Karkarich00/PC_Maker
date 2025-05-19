@@ -36,9 +36,9 @@ public class ScreenRAM implements Screen {
         font = main.font;
         font1 = main.font1;
         font2 = main.font2;
-        BG = new Texture("background2.png");
+        BG = new Texture("RAM.png");
         btnNEXT = new Button(font, "NEXT", 700, 100);
-        btnBACK = new Button(font, "BACK", 100, 100);
+        btnBACK = new Button(font, "BACK", 50, 100);
         ram.add(new Comp("ADATA XPG Lancer Blade 32GB", 10500, 3.5, RAM, font1));
         ram.get(ram.size()-1).sovmest.add("DDR5-6000");
         ram.add(new Comp("Kingston Fury Beast 32GB", 22000, 3, RAM, font1));
@@ -102,8 +102,8 @@ public class ScreenRAM implements Screen {
         batch.begin();
         batch.draw(BG, 0, 0, SCR_WIDTH, SCR_HEIGHT);
         for(int i = 0; i< ram.size(); i++){
-            font.draw(batch, i+1+" ", 50, 1500-i*150);
-            ram.get(i).x = 100;
+            font.draw(batch, i+1+" ", 10, 1500-i*150);
+            ram.get(i).x = 60;
             ram.get(i).y = 1500-i*150;
             if(ram.get(i).light == 0){
                 font1.draw(batch, ram.get(i).name, ram.get(i).x, ram.get(i).y );
