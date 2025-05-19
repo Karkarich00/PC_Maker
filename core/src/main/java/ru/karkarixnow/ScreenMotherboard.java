@@ -47,11 +47,11 @@ public class ScreenMotherboard implements Screen {
         motherboard.add(new Comp("Gigabyte B650 AORUS Elite AX", 20000, 0, MOTHERBOARD, font1));
         motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("AMD7", "DDR5-6000"));
         motherboard.add(new Comp("ASUS TUF Gaming Z790-Plus WiFi", 25000, 0,  MOTHERBOARD, font1));
-        motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("INTEL", "DDR5-6000", "DR4-3600"));
+        motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("INTEL", "DDR5-6000", "DDR4-3600"));
         motherboard.add(new Comp("MSI PRO Z790-P WiFi", 18000, 0,  MOTHERBOARD, font1));
-        motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("INTEL", "DDR5-6000", "DR4-3600"));
+        motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("INTEL", "DDR5-6000", "DDR4-3600"));
         motherboard.add(new Comp("Gigabyte Z790 UD AC", 20000, 0,  MOTHERBOARD, font1));
-        motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("INTEL", "DDR5-6000", "DR4-3600"));
+        motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("INTEL", "DDR5-6000", "DDR4-3600"));
         motherboard.add(new Comp("ASUS ROG Strix B550-F Gaming", 18000, 0,  MOTHERBOARD, font1));
         motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("AMD5", "DDR4-3600"));
         motherboard.add(new Comp("MSI B550 Tomahawk", 15400, 0,  MOTHERBOARD, font1));
