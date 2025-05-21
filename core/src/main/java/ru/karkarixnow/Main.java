@@ -18,7 +18,7 @@ public class Main extends Game {
     public static final int SSD = 3;
     public static final int PSU = 4;
     public static final int GPU = 5;
-    public static String olo = "";
+    public static String emptystring = "";
 
     public SpriteBatch batch;
     public OrthographicCamera camera;
@@ -33,6 +33,7 @@ public class Main extends Game {
     ScreenRAM screenRAM;
     ScreenSSD screenSSD;
     ScreenPSU screenPSU;
+    ScreenComp screenComp;
     public static ArrayList<Comp> lastcomp = new ArrayList<>();
     @Override
     public void create() {
@@ -50,6 +51,7 @@ public class Main extends Game {
         screenRAM = new ScreenRAM(this);
         screenSSD = new ScreenSSD(this);
         screenPSU = new ScreenPSU(this);
+        screenComp = new ScreenComp(this);
         setScreen(screenMenu);
     }
 

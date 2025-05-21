@@ -48,7 +48,7 @@ public class ScreenMenu implements Screen {
             camera.unproject(touch);
 
             if(btnPLAY.hit(touch.x, touch.y)){
-                main.setScreen(main.screenGame);
+                main.setScreen(main.screenMotherboard);
             }
             if(btnEXIT.hit(touch.x, touch.y)){
                 Gdx.app.exit();

@@ -4,6 +4,8 @@ import static ru.karkarixnow.Main.CPU;
 import static ru.karkarixnow.Main.SCR_HEIGHT;
 import static ru.karkarixnow.Main.SCR_WIDTH;
 import static ru.karkarixnow.Main.lastcomp;
+import static ru.karkarixnow.Main.emptystring;
+
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -72,18 +74,28 @@ public class ScreenCPU implements Screen {
             camera.unproject(touch);
             if(btnBACK.hit(touch.x, touch.y)){
                 lastcomp.remove(lastcomp.size()-1);
+                emptystring = "";
                 for(int i = 0; i < cpu.size(); i++){
                     if(cpu.get(i).light == 1){
                         cpu.get(i).light = 0;
                     }
                 }
-                main.setScreen(main.screenMotherboard);
+                main.setScreen(main.screenGame);
             }
             if(btnNEXT.hit(touch.x, touch.y)){
                 for(int i = 0; i < cpu.size(); i++){
-                    if(cpu.get(i).light == 1 && cpu.get(i).sovmest.get(0) == lastcomp.get(1).sovmest.get(0)){
+                    if(cpu.get(i).light == 1 && cpu.get(i).sovmest.get(0) == lastcomp.get(0).sovmest.get(0)){
                         lastcomp.add(cpu.get(i));
+                        emptystring = "";
                         main.setScreen(main.screenRAM);
+                        for(int j = 0; j < cpu.size(); j++){
+                            if(cpu.get(i).light == 1){
+                                cpu.get(i).light = 0;
+                            }
+                        }
+                    }
+                    else{
+                        emptystring = "INCOMPATIBLE";
                     }
                 }
             }
@@ -95,6 +107,7 @@ public class ScreenCPU implements Screen {
                         }
                     }
                     cpu.get(i).light = 1;
+                    emptystring = "";
                 }
             }
 
@@ -115,7 +128,8 @@ public class ScreenCPU implements Screen {
         }
         btnBACK.font.draw(batch, btnBACK.text, btnBACK.x, btnBACK.y );
         btnNEXT.font.draw(batch, btnNEXT.text, btnNEXT.x, btnNEXT.y);
-        font.draw(batch, "CPU", SCR_WIDTH/2-20, SCR_HEIGHT);
+        font.draw(batch, "CPU", SCR_WIDTH/2-75, SCR_HEIGHT);
+        font1.draw(batch, emptystring, SCR_WIDTH/2-160, SCR_HEIGHT-1500);
         batch.end();
     }
 

@@ -40,24 +40,24 @@ public class ScreenMotherboard implements Screen {
         BG = new Texture("Motherboard.png");
         btnNEXT = new Button(font, "NEXT", 700, 100);
         btnBACK = new Button(font, "BACK", 50, 100);
-        motherboard.add(new Comp("ASUS ROG Strix B650-A Gaming WiFi", 25000, 0, MOTHERBOARD, font1));
-        motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("AMD7", "DDR5-6000"));
-        motherboard.add(new Comp("MSI MAG B650 Tomahawk WiFi", 21000, 0, MOTHERBOARD, font1));
-        motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("AMD7", "DDR5-6000"));
-        motherboard.add(new Comp("Gigabyte B650 AORUS Elite AX", 20000, 0, MOTHERBOARD, font1));
-        motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("AMD7", "DDR5-6000"));
-        motherboard.add(new Comp("ASUS TUF Gaming Z790-Plus WiFi", 25000, 0,  MOTHERBOARD, font1));
-        motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("INTEL", "DDR5-6000", "DDR4-3600"));
-        motherboard.add(new Comp("MSI PRO Z790-P WiFi", 18000, 0,  MOTHERBOARD, font1));
-        motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("INTEL", "DDR5-6000", "DDR4-3600"));
-        motherboard.add(new Comp("Gigabyte Z790 UD AC", 20000, 0,  MOTHERBOARD, font1));
-        motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("INTEL", "DDR5-6000", "DDR4-3600"));
-        motherboard.add(new Comp("ASUS ROG Strix B550-F Gaming", 18000, 0,  MOTHERBOARD, font1));
-        motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("AMD5", "DDR4-3600"));
-        motherboard.add(new Comp("MSI B550 Tomahawk", 15400, 0,  MOTHERBOARD, font1));
-        motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("AMD5", "DDR4-3600"));
-        motherboard.add(new Comp("Gigabyte B550 AORUS Elite V2", 13000, 0,  MOTHERBOARD, font1));
-        motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("AMD5", "DDR4-3600"));
+        motherboard.add(new Comp("ASUS ROG Strix B650-A Gaming WiFi", 25000, 5, MOTHERBOARD, font1));
+        motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("AMD7", "DDR5-6000", "PCIe 4.0", "PCIe 5.0"));
+        motherboard.add(new Comp("MSI MAG B650 Tomahawk WiFi", 21000, 5, MOTHERBOARD, font1));
+        motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("AMD7", "DDR5-6000", "PCIe 4.0", "PCIe 5.0"));
+        motherboard.add(new Comp("Gigabyte B650 AORUS Elite AX", 20000, 4.5, MOTHERBOARD, font1));
+        motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("AMD7", "DDR5-6000", "PCIe 4.0", "PCIe 5.0"));
+        motherboard.add(new Comp("ASUS TUF Gaming Z790-Plus WiFi", 25000, 5,  MOTHERBOARD, font1));
+        motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("INTEL", "DDR5-6000", "DDR4-3600", "PCIe 5.0"));
+        motherboard.add(new Comp("MSI PRO Z790-P WiFi", 18000, 4,  MOTHERBOARD, font1));
+        motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("INTEL", "DDR5-6000", "DDR4-3600", "PCIe 5.0"));
+        motherboard.add(new Comp("Gigabyte Z790 UD AC", 20000, 4,  MOTHERBOARD, font1));
+        motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("INTEL", "DDR5-6000", "DDR4-3600", "PCIe 5.0"));
+        motherboard.add(new Comp("ASUS ROG Strix B550-F Gaming", 18000, 5,  MOTHERBOARD, font1));
+        motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("AMD5", "DDR4-3600", "PCIe 4.0"));
+        motherboard.add(new Comp("MSI B550 Tomahawk", 15400, 4.5,  MOTHERBOARD, font1));
+        motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("AMD5", "DDR4-3600", "PCIe 4.0"));
+        motherboard.add(new Comp("Gigabyte B550 AORUS Elite V2", 13000, 4,  MOTHERBOARD, font1));
+        motherboard.get(motherboard.size()-1).sovmest.addAll(Arrays.asList("AMD5", "DDR4-3600", "PCIe 4.0"));
 
 
 
@@ -73,19 +73,26 @@ public class ScreenMotherboard implements Screen {
             touch.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(touch);
             if(btnBACK.hit(touch.x, touch.y)){
-                lastcomp.remove(lastcomp.size()-1);
+                if(lastcomp.size()!=0) {
+                    lastcomp.remove(lastcomp.size() - 1);
+                }
                 for(int i = 0; i < motherboard.size(); i++){
                     if(motherboard.get(i).light == 1){
                         motherboard.get(i).light = 0;
                     }
                 }
-                main.setScreen(main.screenGame);
+                main.setScreen(main.screenMenu);
             }
             if(btnNEXT.hit(touch.x, touch.y)){
                 for(int i = 0; i < motherboard.size(); i++){
                     if(motherboard.get(i).light == 1){
                         lastcomp.add(motherboard.get(i));
-                        main.setScreen(main.screenCPU);
+                        main.setScreen(main.screenGame);
+                        for(int j = 0; j < motherboard.size(); j++) {
+                            if (motherboard.get(i).light == 1) {
+                                motherboard.get(i).light = 0;
+                            }
+                        }
                     }
                 }
             }
@@ -117,7 +124,7 @@ public class ScreenMotherboard implements Screen {
         }
         btnBACK.font.draw(batch, btnBACK.text, btnBACK.x, btnBACK.y );
         btnNEXT.font.draw(batch, btnNEXT.text, btnNEXT.x, btnNEXT.y);
-        font.draw(batch, "MOTHERBOARD", SCR_WIDTH/2-150, SCR_HEIGHT);
+        font.draw(batch, "MOTHERBOARD", SCR_WIDTH/2-220, SCR_HEIGHT);
         batch.end();
     }
 

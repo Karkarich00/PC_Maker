@@ -4,6 +4,8 @@ import static ru.karkarixnow.Main.RAM;
 import static ru.karkarixnow.Main.SCR_HEIGHT;
 import static ru.karkarixnow.Main.SCR_WIDTH;
 import static ru.karkarixnow.Main.lastcomp;
+import static ru.karkarixnow.Main.emptystring;
+
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -14,7 +16,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ScreenRAM implements Screen {
     private SpriteBatch batch;
@@ -71,6 +72,7 @@ public class ScreenRAM implements Screen {
             camera.unproject(touch);
             if(btnBACK.hit(touch.x, touch.y)){
                 lastcomp.remove(lastcomp.size()-1);
+                emptystring = "";
                 for(int i = 0; i < ram.size(); i++){
                     if(ram.get(i).light == 1){
                         ram.get(i).light = 0;
@@ -80,9 +82,36 @@ public class ScreenRAM implements Screen {
             }
             if(btnNEXT.hit(touch.x, touch.y)){
                 for(int i = 0; i < ram.size(); i++){
-                    if(ram.get(i).light == 1 && ram.get(i).sovmest.get(0) == lastcomp.get(1).sovmest.get(1)){
-                        lastcomp.add(ram.get(i));
-                        main.setScreen(main.screenSSD);
+                    if(ram.get(i).light == 1){
+                        if(lastcomp.get(0).sovmest.get(0) == "AMD7" | lastcomp.get(0).sovmest.get(0) == "AMD5") {
+                            if (ram.get(i).sovmest.get(0) == lastcomp.get(0).sovmest.get(1)) {
+                                lastcomp.add(ram.get(i));
+                                emptystring = "";
+                                main.setScreen(main.screenSSD);
+                                for(int j = 0; j < ram.size(); j++){
+                                    if(ram.get(i).light == 1){
+                                        ram.get(i).light = 0;
+                                    }
+                                }
+                            }
+                            else{
+                                emptystring = "";
+                            }
+                        }
+                        else if (lastcomp.get(0).sovmest.get(0) == "INTEL") {
+                            if (ram.get(i).sovmest.get(0) == lastcomp.get(0).sovmest.get(1) | ram.get(i).sovmest.get(0) == lastcomp.get(0).sovmest.get(2)){
+                                lastcomp.add(ram.get(i));
+                                emptystring = "";
+                                main.setScreen(main.screenSSD);
+                                for(int j = 0; j < ram.size(); j++){
+                                    if(ram.get(i).light == 1){
+                                        ram.get(i).light = 0;
+                                    }
+                                }
+                            } else{
+                                emptystring = "";
+                            }
+                        }
                     }
                 }
             }
@@ -94,6 +123,7 @@ public class ScreenRAM implements Screen {
                         }
                     }
                     ram.get(i).light = 1;
+                    emptystring = "";
                 }
             }
 
@@ -114,7 +144,8 @@ public class ScreenRAM implements Screen {
         }
         btnBACK.font.draw(batch, btnBACK.text, btnBACK.x, btnBACK.y );
         btnNEXT.font.draw(batch, btnNEXT.text, btnNEXT.x, btnNEXT.y);
-        font.draw(batch, "RAM", SCR_WIDTH/2-20, SCR_HEIGHT);
+        font.draw(batch, "RAM", SCR_WIDTH/2-75, SCR_HEIGHT);
+        font1.draw(batch, emptystring, SCR_WIDTH/2-160, SCR_HEIGHT-1500);
         batch.end();
     }
 

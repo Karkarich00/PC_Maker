@@ -73,6 +73,11 @@ public class ScreenSSD implements Screen {
                     if(ssd.get(i).light == 1){
                         lastcomp.add(ssd.get(i));
                         main.setScreen(main.screenPSU);
+                        for(int j = 0; j < ssd.size(); j++){
+                            if(ssd.get(i).light == 1){
+                                ssd.get(i).light = 0;
+                            }
+                        }
                     }
                 }
             }
@@ -104,7 +109,7 @@ public class ScreenSSD implements Screen {
         }
         btnBACK.font.draw(batch, btnBACK.text, btnBACK.x, btnBACK.y );
         btnNEXT.font.draw(batch, btnNEXT.text, btnNEXT.x, btnNEXT.y);
-        font.draw(batch, "SSD", SCR_WIDTH/2-20, SCR_HEIGHT);
+        font.draw(batch, "SSD/HDD", SCR_WIDTH/2-100, SCR_HEIGHT);
         batch.end();
     }
 

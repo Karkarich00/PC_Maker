@@ -45,6 +45,8 @@ public class ScreenPSU implements Screen {
         psu.add(new Comp("MSI A850G", 10000, 4, PSU, font1));
         psu.add(new Comp("Thermaltake Toughpower GF1", 9000, 3.5, PSU, font1));
         psu.add(new Comp("DEEPCOOL PF750", 7000, 3, PSU, font1));
+        psu.add(new Comp("be quiet! SYSTEM POWER 10 ", 14500, 4.5, PSU, font1));
+        psu.add(new Comp("Corsair RM1000x", 24000, 5, PSU, font1));
     }
     @Override
     public void show() {
@@ -57,6 +59,7 @@ public class ScreenPSU implements Screen {
             touch.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(touch);
             if(btnBACK.hit(touch.x, touch.y)){
+                lastcomp.remove(lastcomp.size()-1);
                 for(int i = 0; i < psu.size(); i++){
                     if(psu.get(i).light == 1){
                         psu.get(i).light = 0;
@@ -68,7 +71,12 @@ public class ScreenPSU implements Screen {
                 for(int i = 0; i < psu.size(); i++){
                     if(psu.get(i).light == 1){
                         lastcomp.add(psu.get(i));
-                        main.setScreen(main.screenMenu);
+                        main.setScreen(main.screenComp);
+                        for(int j = 0; j < psu.size(); j++){
+                            if(psu.get(i).light == 1){
+                                psu.get(i).light = 0;
+                            }
+                        }
                     }
                 }
             }
@@ -100,7 +108,7 @@ public class ScreenPSU implements Screen {
         }
         btnBACK.font.draw(batch, btnBACK.text, btnBACK.x, btnBACK.y );
         btnNEXT.font.draw(batch, btnNEXT.text, btnNEXT.x, btnNEXT.y);
-        font.draw(batch, "PSU", SCR_WIDTH/2-20, SCR_HEIGHT);
+        font.draw(batch, "PSU", SCR_WIDTH/2-75, SCR_HEIGHT);
         batch.end();
     }
 

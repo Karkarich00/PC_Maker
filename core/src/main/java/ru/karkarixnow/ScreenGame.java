@@ -3,6 +3,7 @@ package ru.karkarixnow;
 import static ru.karkarixnow.Main.GPU;
 import static ru.karkarixnow.Main.SCR_HEIGHT;
 import static ru.karkarixnow.Main.SCR_WIDTH;
+import static ru.karkarixnow.Main.emptystring;
 import static ru.karkarixnow.Main.lastcomp;
 
 import com.badlogic.gdx.Gdx;
@@ -42,14 +43,23 @@ public class ScreenGame implements Screen {
         btnNEXT = new Button(font, "NEXT", 700, 100);
         btnBACK = new Button(font, "BACK", 50, 100);
         comps.add(new Comp("NVIDIA RTX 4090", 239000, 5,GPU, font1));
+        comps.get(comps.size()-1).sovmest.add("PCIe 5.0");
         comps.add(new Comp("RTX 4070 SUPER", 62000, 4,GPU, font1));
+        comps.get(comps.size()-1).sovmest.add("PCIe 5.0");
         comps.add(new Comp("AMD RX 7800 XT", 56000, 4, GPU, font1));
+        comps.get(comps.size()-1).sovmest.add("PCIe 4.0");
         comps.add(new Comp("AMD RX 7700 XT", 44000, 3.5, GPU, font1));
+        comps.get(comps.size()-1).sovmest.add("PCIe 4.0");
         comps.add(new Comp("AMD RX 7600", 27000, 2.5, GPU, font1));
+        comps.get(comps.size()-1).sovmest.add("PCIe 4.0");
         comps.add(new Comp("RTX 3060 Ti", 30500, 3, GPU, font1));
-        comps.add(new Comp("RTX 4080", 120000, 4.5, GPU, font1));
+        comps.get(comps.size()-1).sovmest.add("PCIe 4.0");
+        comps.add(new Comp("NVIDIA RTX 4080", 120000, 4.5, GPU, font1));
+        comps.get(comps.size()-1).sovmest.add("PCIe 5.0");
         comps.add(new Comp("RX 6700 XT", 64000, 3, GPU, font1));
+        comps.get(comps.size()-1).sovmest.add("PCIe 4.0");
         comps.add(new Comp("RTX 4060 CORE", 32000, 3.5, GPU, font1));
+        comps.get(comps.size()-1).sovmest.add("PCIe 4.0");
     }
     @Override
     public void show() {
@@ -61,18 +71,47 @@ public class ScreenGame implements Screen {
             touch.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(touch);
             if(btnBACK.hit(touch.x, touch.y)){
+                lastcomp.remove(lastcomp.size()-1);
+                emptystring = "";
                 for(int i = 0; i < comps.size(); i++){
                     if(comps.get(i).light == 1){
                         comps.get(i).light = 0;
                     }
                 }
-                main.setScreen(main.screenMenu);
+                main.setScreen(main.screenMotherboard);
             }
             if(btnNEXT.hit(touch.x, touch.y)){
                 for(int i = 0; i < comps.size(); i++){
                     if(comps.get(i).light == 1){
-                        lastcomp.add(comps.get(i));
-                        main.setScreen(main.screenMotherboard);
+                        if(lastcomp.get(0).sovmest.get(0) == "INTEL" | lastcomp.get(0).sovmest.get(0) == "AMD5") {
+                            if(comps.get(i).sovmest.get(0) == lastcomp.get(0).sovmest.get(lastcomp.get(0).sovmest.size()-1)){
+                                lastcomp.add(comps.get(i));
+                                emptystring = "";
+                                main.setScreen(main.screenCPU);
+                                for(int j = 0; j < comps.size(); j++){
+                                    if(comps.get(i).light == 1){
+                                        comps.get(i).light = 0;
+                                    }
+                                }
+                            }
+                            else{
+                                emptystring = "INCOMPATIBLE";
+                            }
+                        } else if (lastcomp.get(0).sovmest.get(0) == "AMD7") {
+                            if(comps.get(i).sovmest.get(0) == lastcomp.get(0).sovmest.get(lastcomp.get(0).sovmest.size()-1) | comps.get(i).sovmest.get(0) == lastcomp.get(0).sovmest.get(lastcomp.get(0).sovmest.size()-2)){
+                                lastcomp.add(comps.get(i));
+                                emptystring = "";
+                                main.setScreen(main.screenCPU);
+                                for(int j = 0; j < comps.size(); j++){
+                                    if(comps.get(i).light == 1){
+                                        comps.get(i).light = 0;
+                                    }
+                                }
+                            }
+                            else {
+                                emptystring = "INCOMPATIBLE";
+                            }
+                        }
                     }
                 }
             }
@@ -84,6 +123,7 @@ public class ScreenGame implements Screen {
                         }
                     }
                     comps.get(i).light = 1;
+                    emptystring = "";
                 }
             }
 
@@ -104,7 +144,8 @@ public class ScreenGame implements Screen {
         }
         btnBACK.font.draw(batch, btnBACK.text, btnBACK.x, btnBACK.y );
         btnNEXT.font.draw(batch, btnNEXT.text, btnNEXT.x, btnNEXT.y);
-        font.draw(batch, "GPU", SCR_WIDTH/2-20, SCR_HEIGHT);
+        font.draw(batch, "GPU", SCR_WIDTH/2-75, SCR_HEIGHT);
+        font1.draw(batch, emptystring, SCR_WIDTH/2-160, SCR_HEIGHT-1500);
         batch.end();
     }
 
